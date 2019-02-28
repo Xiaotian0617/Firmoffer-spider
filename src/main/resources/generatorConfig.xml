@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--导入属性配置 -->
+    <properties resource="generator.properties"></properties>
+
+    <!-- 数据库驱动 -->
+    <classPathEntry location="${jdbc.driver.location}"/>
+    <context id="default" targetRuntime="MyBatis3">
+        <!-- 生成的Java文件的编码-->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 自动识别数据库关键字，默认false，如果设置为true，
+            根据SqlReservedWords中定义的关键字列表；
+            一般保留默认值，遇到数据库关键字（Java关键字），
+            使用columnOverride覆盖
+            -->
+        <property name="autoDelimitKeywords" value="false"/>
+
+
+        <!-- 格式化java代码-->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+
+        <!-- 格式化XML代码-->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+
+        <!--beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
+        <property name="beginningDelimiter" value="`"/>
+
+        <property name="endingDelimiter" value="`"/>
+
+
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="false"/>
+        </commentGenerator>
+        <!--数据库链接URL，用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="${jdbc.master.url}"
+                        userId="${jdbc.master.username}" password="${jdbc.master.password}">
+        </jdbcConnection>
+
+
+        <!-- java 处理器类
+            用于处理DB中的类型到Java中的类型，默认使用JavaTypeResolverDefaultImpl
+            Note: 默认会先尝试使用Integer, Long, Short等来对应DECIMAL和NUMERIC的数据类型
+        -->
+        <javaTypeResolver>
+            <!--
+            true: 使用BigDecimal对应DECIMAL 和NUMERIC数据类型
+            false: 默认
+                scale > 0;length > 18: 使用BigDecimal
+                scale = 0;length[10,18]: 使用Long
+                scale = 0;length[5,9]:  使用Integer
+                scale = 0; length<5:    使用Short
+            -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!-- 生成模型的包名和位置-->
+        <javaModelGenerator targetPackage="com.ailu.firmoffer.dao.bean" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- 生成映射文件的包名和位置-->
+        <sqlMapGenerator targetPackage="mappers" targetProject="src/main/resources/">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!-- 生成DAO的包名和位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.ailu.firmoffer.dao.mapper"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--&lt;!&ndash; 要生成哪些表&ndash;&gt;-->
+        <table tableName="firm_offer_key" domainObjectName="FirmOfferKey">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <!--&lt;!&ndash;要生成哪些表&ndash;&gt;-->
+        <!--<table tableName="firm_offer_exchange_balance" domainObjectName="FirmOfferExchangeBalance">-->
+        <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--</table>-->
+
+        <!--&lt;!&ndash; 要生成哪些表&ndash;&gt;-->
+        <!--<table tableName="firm_offer_coin_contrast" domainObjectName="FirmOfferCoinContrast">-->
+        <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="firm_offer_exchange_balance_snap" domainObjectName="FirmOfferExchangeBalanceSnap">-->
+        <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--</table>-->
+
+        <!--要生成哪些表-->
+        <!--<table tableName="firm_offer_order_hist" domainObjectName="FirmOfferOrderHist">-->
+        <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--</table>-->
+
+        <!--要生成哪些表-->
+        <!--<table tableName="firm_offer_movements" domainObjectName="FirmOfferMovements">-->
+        <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--</table>-->
+
+        <!--&lt;!&ndash; 要生成哪些表&ndash;&gt;-->
+        <!--<table tableName="user" domainObjectName="User">-->
+        <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--</table>-->
+
+        <!-- 要生成哪些表-->
+        <!--<table tableName="firm_offer_position" domainObjectName="FirmOfferPosition">-->
+        <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--</table>-->
+
+        <!--&lt;!&ndash;要生成哪些表&ndash;&gt;-->
+        <!--<table tableName="user_firm_offer" domainObjectName="UserFirmOffer">-->
+        <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--</table>-->
+
+
+    </context>
+
+</generatorConfiguration>

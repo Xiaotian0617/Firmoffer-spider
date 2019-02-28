@@ -1,0 +1,59 @@
+spring:
+  profiles:
+    active: test #激活dev
+  proxy:
+    enable: true
+    url: 127.0.0.1
+    port: 1087
+  #    port: 1080
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    #    url: jdbc:mysql://47.52.199.107:3306/test_blz?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true
+    #    username: kaifa_A
+    #    password: 2cyNKp%DHYhnGQfu
+    url: jdbc:mysql://106.46.169.103:3306/firmoffer?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true
+    username: root
+    password: 123456
+    #url: jdbc:mysql://localhost:3306/blz?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&useSSL=false
+    #username: root
+    #password: 123456
+    hikari:
+      connection-timeout: 30000
+      max-lifetime: 60000
+  kafka:
+    #    bootstrap-servers: 13.115.172.56:9092,54.199.145.213:9092,13.231.107.34:9092 #13.231.104.122:9092 #36.255.220.179:9092
+    bootstrap-servers: 106.46.169.103:9092
+    consumer:
+      group-id: 'firmOffer-spider'
+      auto-offset-reset: latest
+    producer:
+      compression-type: gzip
+      acks: 1
+      retries: 3
+
+logging:
+  level:
+    com.ailu.firmoffer: info
+    com.ailu.firmoffer.task.*: info
+    com.ailu.firmoffer.exchange.signature.*: error
+    com.ailu.firmoffer.dao.mapper: debug
+
+server:
+  port: 1910
+
+mybatis:
+  mapper-locations: classpath:mappers/*.xml
+
+firmOffer:
+  topic:
+    okex: firm-okex-data-${spring.profiles.active}
+    huobi: firm-huobi-data-${spring.profiles.active}
+    binance: firm-binance-data-${spring.profiles.active}
+    bitmex: firm-bitmex-data-${spring.profiles.active}
+
+file:
+  #  path: "E://Documents/"
+  path: D:\project\git-program\binance-real-trading\mrwang\Document\
+
+spider:
+  num: 1
